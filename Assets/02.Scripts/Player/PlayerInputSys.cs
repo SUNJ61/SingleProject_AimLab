@@ -17,7 +17,7 @@ public class PlayerInputSys : MonoBehaviour
         set
         {
             fireMode = value;
-            FireState = FireMode[0]; //총을 처음 주웠을 때 기본 세팅
+            FireState = FireMode[idx]; //총을 처음 주웠을 때 기본 세팅
         }
     }
 
@@ -31,7 +31,8 @@ public class PlayerInputSys : MonoBehaviour
             playerFire.FireState = FireState;
         }
     }
-    private int idx;
+    private int idx = 0;
+
     private void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
@@ -137,8 +138,8 @@ public class PlayerInputSys : MonoBehaviour
 
     private void OnModeStarted(InputAction.CallbackContext context) // 총 모드 변경 키 누름
     {
-        FireState = (FireMode[0] +1) % FireMode.Length;
-        
+        idx = (idx +1) % FireMode.Length;
+        FireState = FireMode[idx];
     }
 
     private void OnActionStarted(InputAction.CallbackContext context) // 상호작용 키 누름 (잠깐 동안만 활성화 되면됨.)

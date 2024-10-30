@@ -32,6 +32,7 @@ public class GunChange : MonoBehaviour
         playerFire.VerticalGunRebound = PlayerGunData.Vertical_ReBound;
         playerFire.HorizontalGunRebound = PlayerGunData.Horizontal_ReBound;
         playerFire.FireBranch = PlayerGunData.FireBranch;
+        playerFire.Fov = PlayerGunData.Fov;
         playerInputSys.FireMode = PlayerGunData.FireMode;
     }
 }

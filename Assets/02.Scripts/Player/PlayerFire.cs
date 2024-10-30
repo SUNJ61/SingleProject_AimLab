@@ -7,7 +7,6 @@ public class PlayerFire : MonoBehaviour
 {
     private Transform CameraTr;
     private CinemachineVirtualCamera PlayerCamera;
-    private CinemachineBasicMultiChannelPerlin PlayerNoise;
     private PlayerMove playerMove;
 
     private Ray ray;
@@ -31,6 +30,12 @@ public class PlayerFire : MonoBehaviour
     {
         get { return delay; }
         set { delay = value; }
+    }
+    [SerializeField] private float fov; //확대 배율
+    public float Fov
+    {
+        get { return fov; }
+        set { fov = value; }
     }
 
     [SerializeField] private int[] fireBranch;
@@ -116,7 +121,7 @@ public class PlayerFire : MonoBehaviour
                     {
                         playerMove.ApplyVerticalReBound(VerticalGunRebound);
                         prevTime = Time.time;
-                        StartCoroutine(FireFalse());
+                        StartCoroutine(FireFalse(Delay * 1.2f));
                     }
                     else //총을 쏘지 않을 때 반동 제거
                     {
@@ -137,7 +142,7 @@ public class PlayerFire : MonoBehaviour
                 break;
 
             case 1: //스코프 모드 구현
-                PlayerCamera.m_Lens.FieldOfView = 50.0f;
+                PlayerCamera.m_Lens.FieldOfView = Fov;
                 break;
         }
     }
@@ -169,9 +174,9 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    IEnumerator FireFalse()
+    IEnumerator FireFalse(float delay)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(delay);
         IsFire = false;
     }
 }
