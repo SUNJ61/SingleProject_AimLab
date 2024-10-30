@@ -1,10 +1,10 @@
 using UnityEngine;
 
 public class GunChange : MonoBehaviour
-{ //ÃÑ±âÀÇ º¯È­°¡ »ı±â¸é µ¥ÀÌÅÍ¸¦ ¾÷µ¥ÀÌÆ®ÇØ¼­ ´Ù¸¥ ½ºÅ©¸³Æ®·Î µ¥ÀÌÅÍ¸¦ »Ñ·ÁÁÖ´Â ¿ªÇÒ.
+{ //ì´ê¸°ì˜ ë³€í™”ê°€ ìƒê¸°ë©´ ë°ì´í„°ë¥¼ ì—…ë°ì´íŠ¸í•´ì„œ ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ë¡œ ë°ì´í„°ë¥¼ ë¿Œë ¤ì£¼ëŠ” ì—­í• .
     [SerializeField] private GunData playerGunData;
     public GunData PlayerGunData
-    { //ÇÃ·¹ÀÌ¾î°¡ ÃÑÀ» Áİ°Å³ª ¹Ù²Ù¸é ¾÷µ¥ÀÌÆ® ½ÃÄÑ¾ßÇÑ´Ù.
+    { //í”Œë ˆì´ì–´ê°€ ì´ì„ ì¤ê±°ë‚˜ ë°”ê¾¸ë©´ ì—…ë°ì´íŠ¸ ì‹œì¼œì•¼í•œë‹¤.
         get { return playerGunData; }
         set
         {
@@ -13,7 +13,7 @@ public class GunChange : MonoBehaviour
         }
     }
 
-    private PlayerFire playerFire; //ÃÑ±â ¹ß»ç µô·¹ÀÌ, ¹İµ¿ ÇÊ¿ä.
+    private PlayerFire playerFire; //ì´ê¸° ë°œì‚¬ ë”œë ˆì´, ë°˜ë™ í•„ìš”.
     private PlayerInputSys playerInputSys;
 
     private void Awake()

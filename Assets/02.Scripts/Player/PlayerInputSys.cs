@@ -17,7 +17,7 @@ public class PlayerInputSys : MonoBehaviour
         set
         {
             fireMode = value;
-            FireState = FireMode[0]; //ÃÑÀ» Ã³À½ ÁÖ¿üÀ» ¶§ ±âº» ¼¼ÆÃ
+            FireState = FireMode[0]; //ì´ì„ ì²˜ìŒ ì£¼ì› ì„ ë•Œ ê¸°ë³¸ ì„¸íŒ…
         }
     }
 
@@ -43,11 +43,11 @@ public class PlayerInputSys : MonoBehaviour
     {
         playerActionMap = playerInput.actions.FindActionMap("Player");
 
-        playerActionMap.FindAction("Move").performed += OnMovePerformed; //performed´Â ´©¸¦ ¶§ °ª Àü´Ş. (´©¸£´Â °ªÀÇ º¯È­°¡ »ı±â¸é °è¼Ó ¾÷µ¥ÀÌÆ® -> ¿©·¯°³ÀÇ Å°°¡ µ¿½Ã¿¡ ÀÔ·ÂµÇ´Â °É °ü¸®¿¡ ÀûÇÕ?)
-        playerActionMap.FindAction("Move").canceled += OnMoveCanceled; //canceled´Â ´©¸£´Â °ÍÀÌ Á¾·áµÇ¸é °ªÀ» Àü´ŞÇÑ´Ù.
+        playerActionMap.FindAction("Move").performed += OnMovePerformed; //performedëŠ” ëˆ„ë¥¼ ë•Œ ê°’ ì „ë‹¬. (ëˆ„ë¥´ëŠ” ê°’ì˜ ë³€í™”ê°€ ìƒê¸°ë©´ ê³„ì† ì—…ë°ì´íŠ¸ -> ì—¬ëŸ¬ê°œì˜ í‚¤ê°€ ë™ì‹œì— ì…ë ¥ë˜ëŠ” ê±¸ ê´€ë¦¬ì— ì í•©?)
+        playerActionMap.FindAction("Move").canceled += OnMoveCanceled; //canceledëŠ” ëˆ„ë¥´ëŠ” ê²ƒì´ ì¢…ë£Œë˜ë©´ ê°’ì„ ì „ë‹¬í•œë‹¤.
         playerActionMap.FindAction("Look").performed += OnLookPerformed;
         playerActionMap.FindAction("Look").canceled += OnLookCanceled;
-        playerActionMap.FindAction("SlowWalk").started += OnSlowWalkStarted; //started´Â ´©¸¦ ¶§ °ª Àü´Ş. (´©¸£´Â °ªÀÌ º¯È­ ÇÏ´õ¶óµµ ¾÷µ¥ÀÌÆ® x)
+        playerActionMap.FindAction("SlowWalk").started += OnSlowWalkStarted; //startedëŠ” ëˆ„ë¥¼ ë•Œ ê°’ ì „ë‹¬. (ëˆ„ë¥´ëŠ” ê°’ì´ ë³€í™” í•˜ë”ë¼ë„ ì—…ë°ì´íŠ¸ x)
         playerActionMap.FindAction("SlowWalk").canceled += OnSlowWalkCanceled;
         playerActionMap.FindAction("Jump").started += OnJumpStarted;
         playerActionMap.FindAction("Jump").canceled += OnJumpCanceled;
@@ -66,92 +66,92 @@ public class PlayerInputSys : MonoBehaviour
 
     private void SendInventoryIdx(int idx)
     {
-        //¼ıÀÚ Å° ´©¸¥ °ÍÀ» ÃÑ Ã¼ÀÎÁö¿¡ Àü´Ş 
+        //ìˆ«ì í‚¤ ëˆ„ë¥¸ ê²ƒì„ ì´ ì²´ì¸ì§€ì— ì „ë‹¬ 
     }
 
-    private void OnMovePerformed(InputAction.CallbackContext context) //ÇÃ·¹ÀÌ¾î ÀÌµ¿
+    private void OnMovePerformed(InputAction.CallbackContext context) //í”Œë ˆì´ì–´ ì´ë™
     {
         Vector2 dir = context.ReadValue<Vector2>();
         playerMove.PlayerDir = new Vector3(dir.x, 0f, dir.y).normalized;
     }
 
-    private void OnMoveCanceled(InputAction.CallbackContext context) //ÇÃ·¹ÀÌ¾î ÀÌµ¿ ¸ØÃã
+    private void OnMoveCanceled(InputAction.CallbackContext context) //í”Œë ˆì´ì–´ ì´ë™ ë©ˆì¶¤
     {
         playerMove.PlayerDir = Vector3.zero;
     }
 
-    private void OnLookPerformed(InputAction.CallbackContext context) //¸¶¿ì½º ÀÌµ¿
+    private void OnLookPerformed(InputAction.CallbackContext context) //ë§ˆìš°ìŠ¤ ì´ë™
     {
         playerMove.PlayerRot = context.ReadValue<Vector2>();
     }
 
-    private void OnLookCanceled(InputAction.CallbackContext context) //¸¶¿ì½º ÀÌµ¿ ¸ØÃã
+    private void OnLookCanceled(InputAction.CallbackContext context) //ë§ˆìš°ìŠ¤ ì´ë™ ë©ˆì¶¤
     {
         playerMove.PlayerRot = Vector2.zero;
     }
 
-    private void OnSlowWalkStarted(InputAction.CallbackContext context) //¿ŞÂÊ ½¬ÇÁÆ® ´©¸§
+    private void OnSlowWalkStarted(InputAction.CallbackContext context) //ì™¼ìª½ ì‰¬í”„íŠ¸ ëˆ„ë¦„
     {
         playerMove.Player_MoveState = true;
     }
 
-    private void OnSlowWalkCanceled(InputAction.CallbackContext context) //¿ŞÂÊ ½¬ÇÁÆ® ¶«
+    private void OnSlowWalkCanceled(InputAction.CallbackContext context) //ì™¼ìª½ ì‰¬í”„íŠ¸ ë•œ
     {
         playerMove.Player_MoveState = false;
     }
 
-    private void OnJumpStarted(InputAction.CallbackContext context) //Á¡ÇÁ ´©¸§
+    private void OnJumpStarted(InputAction.CallbackContext context) //ì í”„ ëˆ„ë¦„
     {
         playerMove.Player_IsJump = true;
     }
 
-    private void OnJumpCanceled(InputAction.CallbackContext context) //Á¡ÇÁ Å° ¶«
+    private void OnJumpCanceled(InputAction.CallbackContext context) //ì í”„ í‚¤ ë•œ
     {
         playerMove.Player_IsJump = false;
     }
 
-    private void OnFireStarted(InputAction.CallbackContext context) //¹ß»ç Å° ´©¸§
+    private void OnFireStarted(InputAction.CallbackContext context) //ë°œì‚¬ í‚¤ ëˆ„ë¦„
     {
         playerFire.IsFire = true;
     }
 
-    private void OnFireCanceled(InputAction.CallbackContext context) //¹ß»ç Å° ¶«
+    private void OnFireCanceled(InputAction.CallbackContext context) //ë°œì‚¬ í‚¤ ë•œ
     {
         playerFire.IsFire = false;
     }
 
-    private void OnZoomStarted(InputAction.CallbackContext context) //ÁÜ Å° ´©¸§
+    private void OnZoomStarted(InputAction.CallbackContext context) //ì¤Œ í‚¤ ëˆ„ë¦„
     {
         playerFire.ZoomState = 1;
     }
 
-    private void OnZoomCanceled(InputAction.CallbackContext context) //ÁÜ Å° ¶«
+    private void OnZoomCanceled(InputAction.CallbackContext context) //ì¤Œ í‚¤ ë•œ
     {
         playerFire.ZoomState = 0;
     }
 
-    private void OnReloadStarted(InputAction.CallbackContext context) // ÀåÀü Å° ´©¸§ (Àá±ñ µ¿¾È¸¸ È°¼ºÈ­ µÇ¸éµÊ. ÄÚ·çÆ¾ »ç¿ë)
+    private void OnReloadStarted(InputAction.CallbackContext context) // ì¥ì „ í‚¤ ëˆ„ë¦„ (ì ê¹ ë™ì•ˆë§Œ í™œì„±í™” ë˜ë©´ë¨. ì½”ë£¨í‹´ ì‚¬ìš©)
     {
 
     }
 
-    private void OnModeStarted(InputAction.CallbackContext context) // ÃÑ ¸ğµå º¯°æ Å° ´©¸§
+    private void OnModeStarted(InputAction.CallbackContext context) // ì´ ëª¨ë“œ ë³€ê²½ í‚¤ ëˆ„ë¦„
     {
         FireState = (FireMode[0] +1) % FireMode.Length;
         
     }
 
-    private void OnActionStarted(InputAction.CallbackContext context) // »óÈ£ÀÛ¿ë Å° ´©¸§ (Àá±ñ µ¿¾È¸¸ È°¼ºÈ­ µÇ¸éµÊ.)
+    private void OnActionStarted(InputAction.CallbackContext context) // ìƒí˜¸ì‘ìš© í‚¤ ëˆ„ë¦„ (ì ê¹ ë™ì•ˆë§Œ í™œì„±í™” ë˜ë©´ë¨.)
     {
 
     }
 
-    private void OnDropStarted(InputAction.CallbackContext context) // ¹ö¸®±â Å° ´©¸§ (Àá±ñ µ¿¾È¸¸ È°¼ºÈ­ µÇ¸éµÊ.)
+    private void OnDropStarted(InputAction.CallbackContext context) // ë²„ë¦¬ê¸° í‚¤ ëˆ„ë¦„ (ì ê¹ ë™ì•ˆë§Œ í™œì„±í™” ë˜ë©´ë¨.)
     {
 
     }
 
-    private void OnInventoryStarted(InputAction.CallbackContext context) // Äü ½½·Ô Å° ´©¸§ -> ÀÌ°Å startedÇÏ³ª¸é µÉµí?
+    private void OnInventoryStarted(InputAction.CallbackContext context) // í€µ ìŠ¬ë¡¯ í‚¤ ëˆ„ë¦„ -> ì´ê±° startedí•˜ë‚˜ë©´ ë ë“¯?
     {
         var key = Keyboard.current;
 
@@ -165,12 +165,12 @@ public class PlayerInputSys : MonoBehaviour
             SendInventoryIdx(3);
     }
 
-    private void OnShopStarted(InputAction.CallbackContext context) // »óÁ¡ ¿­±â Å° ´©¸§ -> Åä±Û·Î ¸¸µé¾î¾ßÇØ¼­ startedÇÏ³ª¸é µÉµí?
+    private void OnShopStarted(InputAction.CallbackContext context) // ìƒì  ì—´ê¸° í‚¤ ëˆ„ë¦„ -> í† ê¸€ë¡œ ë§Œë“¤ì–´ì•¼í•´ì„œ startedí•˜ë‚˜ë©´ ë ë“¯?
     {
 
     }
 
-    private void OnEscapeStarted(InputAction.CallbackContext context) // ´İ±â Å° ´©¸§ -> Àá±ñ µ¿¾È¸¸ È°¼ºÈ­ µÇ¸éµÊ.
+    private void OnEscapeStarted(InputAction.CallbackContext context) // ë‹«ê¸° í‚¤ ëˆ„ë¦„ -> ì ê¹ ë™ì•ˆë§Œ í™œì„±í™” ë˜ë©´ë¨.
     {
 
     }

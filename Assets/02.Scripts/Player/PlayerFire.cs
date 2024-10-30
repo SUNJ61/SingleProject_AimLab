@@ -14,19 +14,19 @@ public class PlayerFire : MonoBehaviour
     private RaycastHit hit;
 
     private float prevTime;
-    [SerializeField]private float verticalGunRebound; //¼öÁ÷ ¹İµ¿
+    [SerializeField]private float verticalGunRebound; //ìˆ˜ì§ ë°˜ë™
     public float VerticalGunRebound
     {
         get { return verticalGunRebound; }
         set { verticalGunRebound = value; }
     }
-    [SerializeField] private float horizontalGunRebound; //¼öÆò ¹İµ¿
+    [SerializeField] private float horizontalGunRebound; //ìˆ˜í‰ ë°˜ë™
     public float HorizontalGunRebound
     {
         get { return horizontalGunRebound; }
         set { horizontalGunRebound = value; }
     }
-    [SerializeField] private float delay = 0.2f; //ÃÑ±â µô·¹ÀÌ
+    [SerializeField] private float delay = 0.2f; //ì´ê¸° ë”œë ˆì´
     public float Delay
     {
         get { return delay; }
@@ -41,13 +41,13 @@ public class PlayerFire : MonoBehaviour
     }
 
     private int ShootCount = 0;
-    private int fireState; //¹ß»ç ¸ğµå 0 : ¿¬»ç, 1 : ´Ü¹ß
+    private int fireState; //ë°œì‚¬ ëª¨ë“œ 0 : ì—°ì‚¬, 1 : ë‹¨ë°œ
     public int FireState
     {
         get { return fireState; }
         set { fireState = value; }
     }
-    private int zoomState; //ÁÜ ¸ğµå 0 : °ßÂø, 1 : ½ºÄÚÇÁ
+    private int zoomState; //ì¤Œ ëª¨ë“œ 0 : ê²¬ì°©, 1 : ìŠ¤ì½”í”„
     public int ZoomState
     {
         get { return zoomState; }
@@ -58,7 +58,7 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    private bool isFire; //¹ß»ç À¯¹«
+    private bool isFire; //ë°œì‚¬ ìœ ë¬´
     public bool IsFire
     {
         get { return isFire; }
@@ -67,9 +67,9 @@ public class PlayerFire : MonoBehaviour
             isFire = value;
             if (!IsFire)
             {
-                ShootCount = 0; //ÃÑ ½î±â°¡ ³¡³µÀ» ¶§ ¿¬»ç Ä«¿îÆ® ÃÊ±âÈ­.
-                playerMove.ExitGunRebound(); //ÃÑ ½î±â°¡ ³¡³µÀ» ¶§ ÁÂ¿ì ¹İµ¿À¸·Î »ı±ä Ä«¸Ş¶ó ÁÂ¿ì È¸Àü ÃÊ±âÈ­.
-                playerMove.ApplyVerticalReBound(0f); //ÃÑ ½î±â°¡ ³¡³µÀ» ¶§ ¹İµ¿ ÃÊ±âÈ­
+                ShootCount = 0; //ì´ ì˜ê¸°ê°€ ëë‚¬ì„ ë•Œ ì—°ì‚¬ ì¹´ìš´íŠ¸ ì´ˆê¸°í™”.
+                playerMove.ExitGunRebound(); //ì´ ì˜ê¸°ê°€ ëë‚¬ì„ ë•Œ ì¢Œìš° ë°˜ë™ìœ¼ë¡œ ìƒê¸´ ì¹´ë©”ë¼ ì¢Œìš° íšŒì „ ì´ˆê¸°í™”.
+                playerMove.ApplyVerticalReBound(0f); //ì´ ì˜ê¸°ê°€ ëë‚¬ì„ ë•Œ ë°˜ë™ ì´ˆê¸°í™”
                 playerMove.ApplyHorizontalReBound(0f);
             }
         }
@@ -104,7 +104,7 @@ public class PlayerFire : MonoBehaviour
                         FireSpray(FireBranch);
                         prevTime = Time.time;
                     }
-                    else //ÃÑÀ» ½îÁö ¾ÊÀ» ¶§ ¹İµ¿ Á¦°Å
+                    else //ì´ì„ ì˜ì§€ ì•Šì„ ë•Œ ë°˜ë™ ì œê±°
                     {
                         playerMove.ApplyVerticalReBound(0f);
                         playerMove.ApplyHorizontalReBound(0f);
@@ -118,7 +118,7 @@ public class PlayerFire : MonoBehaviour
                         prevTime = Time.time;
                         StartCoroutine(FireFalse());
                     }
-                    else //ÃÑÀ» ½îÁö ¾ÊÀ» ¶§ ¹İµ¿ Á¦°Å
+                    else //ì´ì„ ì˜ì§€ ì•Šì„ ë•Œ ë°˜ë™ ì œê±°
                     {
                         playerMove.ApplyVerticalReBound(0f);
                         playerMove.ApplyHorizontalReBound(0f);
@@ -132,36 +132,36 @@ public class PlayerFire : MonoBehaviour
     {
         switch (ZoomState)
         {
-            case 0: //°ßÂø ¸ğµå ±¸Çö
+            case 0: //ê²¬ì°© ëª¨ë“œ êµ¬í˜„
                 PlayerCamera.m_Lens.FieldOfView = 60.0f;
                 break;
 
-            case 1: //½ºÄÚÇÁ ¸ğµå ±¸Çö
+            case 1: //ìŠ¤ì½”í”„ ëª¨ë“œ êµ¬í˜„
                 PlayerCamera.m_Lens.FieldOfView = 50.0f;
                 break;
         }
     }
 
-    private void FireSpray(int[] branch) //ÃÑ±â ½ºÇÁ·¹ÀÌ Àû¿ë ÇÔ¼ö.
+    private void FireSpray(int[] branch) //ì´ê¸° ìŠ¤í”„ë ˆì´ ì ìš© í•¨ìˆ˜.
     {
         ShootCount++;
 
-        if(ShootCount <= branch[0]) //½ºÇÁ·¹ÀÌ Ã¹¹øÂ° ºĞ±â
+        if(ShootCount <= branch[0]) //ìŠ¤í”„ë ˆì´ ì²«ë²ˆì§¸ ë¶„ê¸°
         {
             playerMove.ApplyVerticalReBound(VerticalGunRebound);
             playerMove.ApplyHorizontalReBound(0f);
         }
-        else if(ShootCount <= branch[1]) //½ºÇÁ·¹ÀÌ µÎ¹øÂ° ºĞ±â
+        else if(ShootCount <= branch[1]) //ìŠ¤í”„ë ˆì´ ë‘ë²ˆì§¸ ë¶„ê¸°
         {
             playerMove.ApplyVerticalReBound(0f);
             playerMove.ApplyHorizontalReBound(HorizontalGunRebound);
         }
-        else //½ºÇÁ·¹ÀÌ ¼¼¹øÂ° ºĞ±â (¿©±â¼­ ¹İº¹)
+        else //ìŠ¤í”„ë ˆì´ ì„¸ë²ˆì§¸ ë¶„ê¸° (ì—¬ê¸°ì„œ ë°˜ë³µ)
         {
-            if(ShootCount == branch[2]) //Ä«¿îÆ® ÃÊ±âÈ­
+            if(ShootCount == branch[2]) //ì¹´ìš´íŠ¸ ì´ˆê¸°í™”
                 ShootCount = branch[1] + 1;
 
-            if (ShootCount == branch[1] + 1) //¹æÇâ ÀüÈ¯
+            if (ShootCount == branch[1] + 1) //ë°©í–¥ ì „í™˜
                 HorizontalGunRebound *= -1;
 
             playerMove.ApplyVerticalReBound(0f);

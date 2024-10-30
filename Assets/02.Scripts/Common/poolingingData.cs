@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolingData
-{//Ç®¸µ µ¥ÀÌÅÍ °ª ÀúÀå
+{//í’€ë§ ë°ì´í„° ê°’ ì €ì¥
     public List<GameObject> Pool_List;
     public GameObject Prefab;
     public string GroupName;

@@ -3,14 +3,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController Player_Controller;
-    private Transform Camera_Pivot; //Ä«¸Ş¶ó xÃà È¸Àü
-    private Transform FirePos_Pivot; //FireFos xÃà È¸Àü
+    private Transform Camera_Pivot; //ì¹´ë©”ë¼ xì¶• íšŒì „
+    private Transform FirePos_Pivot; //FireFos xì¶• íšŒì „
     private Transform Player_Transform;
     private AudioSource PlayerSource;
     private AudioClip Walk;
     private AudioClip Run;
 
-    private Vector3 Velocity_y = Vector3.zero; //Áß·Â
+    private Vector3 Velocity_y = Vector3.zero; //ì¤‘ë ¥
 
     private float moveSpeed = 6.0f;
     private float currentXRot = 0f;
@@ -18,11 +18,11 @@ public class PlayerMove : MonoBehaviour
     private float VerticalReboundAmount;
     private float HorizontalReboundAmount;
 
-    private readonly float rotSpeed = 10.0f; //°¨µµ
+    private readonly float rotSpeed = 10.0f; //ê°ë„
     private readonly float Gravity = -25f;
     private readonly float JumpHeight = 0.4f;
 
-    private Vector3 playerDir = Vector3.zero; //ÀÌµ¿ ¹æÇâ
+    private Vector3 playerDir = Vector3.zero; //ì´ë™ ë°©í–¥
     public Vector3 PlayerDir
     { 
         get { return playerDir; } 
@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
         } 
     }
 
-    private Vector2 playerRot = Vector2.zero; //È¸Àü ¹æÇâ
+    private Vector2 playerRot = Vector2.zero; //íšŒì „ ë°©í–¥
     public Vector2 PlayerRot
     {
         get { return playerRot; }
@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private bool player_MoveState; //´À¸®°Ô °È±â ½ÇÇà Ã¼Å©
+    private bool player_MoveState; //ëŠë¦¬ê²Œ ê±·ê¸° ì‹¤í–‰ ì²´í¬
     public bool Player_MoveState
     {
         get { return player_MoveState; }
@@ -103,12 +103,12 @@ public class PlayerMove : MonoBehaviour
 
     private void CheckMoveState()
     {
-        if (PlayerDir == Vector3.zero || !IsGround) //¸ØÃçÀÖÀ» ¶§¿Í Á¡ÇÁ½Ã ¼Ò¸® ¸ØÃã
+        if (PlayerDir == Vector3.zero || !IsGround) //ë©ˆì¶°ìˆì„ ë•Œì™€ ì í”„ì‹œ ì†Œë¦¬ ë©ˆì¶¤
         {
             //PlayerSource.Stop();
         }
 
-        if (Player_MoveState) //´À¸®°Ô °È±â
+        if (Player_MoveState) //ëŠë¦¬ê²Œ ê±·ê¸°
         {
             moveSpeed = 3.0f;
             //if (PlayerSource.clip != Walk || !PlayerSource.isPlaying)
@@ -116,7 +116,7 @@ public class PlayerMove : MonoBehaviour
             //    PlayerSource.Stop();
             //}
         }
-        else if (!Player_MoveState) // °È±â
+        else if (!Player_MoveState) // ê±·ê¸°
         {
             moveSpeed = 6.0f;
             //if (PlayerSource.clip != Run || !PlayerSource.isPlaying)

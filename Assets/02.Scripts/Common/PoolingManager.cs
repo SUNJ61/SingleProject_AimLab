@@ -29,7 +29,7 @@ public class PoolingManager : MonoBehaviour
             Pooling(i, Data);
     }
 
-    private void Pooling(int key, Dictionary<int, PoolingData> data) //µñ¼Å³Ê¸®¿¡ ÀúÀåÇÑ µ¥ÀÌÅÍ·Î ¿ÀºêÁ§Æ® Ç®¸µ
+    private void Pooling(int key, Dictionary<int, PoolingData> data) //ë”•ì…”ë„ˆë¦¬ì— ì €ì¥í•œ ë°ì´í„°ë¡œ ì˜¤ë¸Œì íŠ¸ í’€ë§
     {
         GameObject Group = new GameObject(data[key].GroupName);
         for (int i = 0; i < data[key].MaxPool; i++)
@@ -43,7 +43,7 @@ public class PoolingManager : MonoBehaviour
         }
     }
 
-    public GameObject GetObject(int key) //µñ¼Å³Ê¸® ¸®½ºÆ®¿¡ ÀúÀåµÈ ¿ÀºêÁ§Æ®Áß ºñÈ°¼ºÈ­µÈ ¿ÀºêÁ§Æ® ¹İÈ¯.
+    public GameObject GetObject(int key) //ë”•ì…”ë„ˆë¦¬ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥ëœ ì˜¤ë¸Œì íŠ¸ì¤‘ ë¹„í™œì„±í™”ëœ ì˜¤ë¸Œì íŠ¸ ë°˜í™˜.
     {
         foreach (var obj in Data[key].Pool_List)
         {

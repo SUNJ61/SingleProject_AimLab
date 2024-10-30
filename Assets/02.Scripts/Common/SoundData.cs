@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class SoundData
-{ //¿ÀºêÁ§Æ®¿¡ »óÁÖ½ÃÅ°´Â »ç¿îµå ¹Ú½º µ¥ÀÌÅÍ¸¦ ÀúÀåÇÑ´Ù.
+{ //ì˜¤ë¸Œì íŠ¸ì— ìƒì£¼ì‹œí‚¤ëŠ” ì‚¬ìš´ë“œ ë°•ìŠ¤ ë°ì´í„°ë¥¼ ì €ì¥í•œë‹¤.
     public GameObject SoundBox;
     public AudioSource SoundBox_AudioSource;
 
