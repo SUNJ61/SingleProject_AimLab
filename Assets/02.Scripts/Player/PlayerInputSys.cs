@@ -6,6 +6,7 @@ public class PlayerInputSys : MonoBehaviour
 {
     private PlayerMove playerMove;
     private PlayerFire playerFire;
+    private Inventory playerInventory;
 
     private PlayerInput playerInput;
     private InputActionMap playerActionMap;
@@ -38,6 +39,7 @@ public class PlayerInputSys : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         playerFire = GetComponent<PlayerFire>();
         playerInput = GetComponent<PlayerInput>();
+        playerInventory = GetComponent<Inventory>();
     }
 
     private void OnEnable()
@@ -67,7 +69,7 @@ public class PlayerInputSys : MonoBehaviour
 
     private void SendInventoryIdx(int idx)
     {
-        //숫자 키 누른 것을 총 체인지에 전달 
+        playerInventory.SlotIdx = idx; //슬롯 인덱스 전달.
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context) //플레이어 이동
