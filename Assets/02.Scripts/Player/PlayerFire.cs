@@ -63,7 +63,7 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    private bool isFire; //발사 유무
+    [SerializeField] bool isFire; //발사 유무
     public bool IsFire
     {
         get { return isFire; }
@@ -79,6 +79,12 @@ public class PlayerFire : MonoBehaviour
             }
         }
     }
+    [SerializeField] bool canFire = false;
+    public bool CanFire
+    {
+        get { return canFire; }
+        set { canFire = value; }
+    }
 
     private void Awake()
     {
@@ -92,9 +98,12 @@ public class PlayerFire : MonoBehaviour
 
     private void Update()
     {
-        if (!IsFire) return;
+        if(isFire) return;
 
-        FireAction();
+        if (CanFire)
+        {
+            FireAction();
+        }
     }
 
     private void FireAction()
@@ -103,7 +112,7 @@ public class PlayerFire : MonoBehaviour
         {
             switch(FireState)
             {
-                case 0:
+                case 0: //연발
                     if (Time.time - prevTime > Delay)
                     {
                         FireSpray(FireBranch);
@@ -116,7 +125,7 @@ public class PlayerFire : MonoBehaviour
                     }
                     break;
 
-                case 1:
+                case 1: //단발
                     if (Time.time - prevTime > Delay * 1.5f)
                     {
                         playerMove.ApplyVerticalReBound(VerticalGunRebound);

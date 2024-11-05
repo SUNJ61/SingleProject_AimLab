@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685f49eea863edf41bf7ed92dc33f487, type: 3}
   m_Name: SRGunData
   m_EditorClassIdentifier: 
+  SlotTranform: {x: 0, y: 0.16, z: 0}
   GunType: SR
   Vertical_ReBound: 3
   Horizontal_ReBound: 0
@@ -19,5 +20,6 @@ MonoBehaviour:
   Fov: 15
   BulletMax: 5
   SubBullet: 10
+  SlotIdxData: 0
   FireBranch: 050000000a0000000f000000
   FireMode: 01000000

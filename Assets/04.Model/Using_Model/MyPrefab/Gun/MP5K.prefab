@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6066872247252458519}
   - component: {fileID: 4146055206281084355}
   - component: {fileID: 1693539090932651543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MP5K
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

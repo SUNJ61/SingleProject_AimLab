@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    Dictionary<int, InventoryItem> SlotData; //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
+    public static Dictionary<int, InventoryItem> SlotData; //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
     [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
+    PlayerFire playerFire;
+    GunChange playerGunChange;
+
     private int slotIdx;
     public int SlotIdx
     {
@@ -21,6 +24,9 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         PlayerSlot = transform.GetChild(1).transform;
+        playerGunChange = GetComponent<GunChange>();
+        playerFire = GetComponent<PlayerFire>();
+
         for(int i = 0; i < PlayerSlot.childCount; i++)
         {
             SlotList.Add(PlayerSlot.GetChild(i).gameObject);
@@ -66,15 +72,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void GetItem(GameObject Item) //아이템을 얻을 때 (아이템 습득, 아이템 구매에서 호출)
+    public void GetItem(GameObject Item) //아이템을 얻을 때 (아이템 습득, 아이템 구매에서 호출)
     {
         Gun gun = Item.GetComponent<Gun>();
         int Idx = gun.gundata.SlotIdxData;
-
+        Debug.Log(Idx);
         SlotDataUpdate(Item, Idx);
 
         Transform itemSlot = SlotList[Idx].transform;
         Item.transform.SetParent(itemSlot);
+        Item.transform.localPosition = gun.gundata.SlotTranform;
+
+        playerGunChange.PlayerGunData = gun.gundata;
+        playerFire.CanFire = true;
     }
 
     private void DropItem(int Idx) //Idx가 0과 1일 때만 가능.
@@ -97,7 +107,7 @@ public class Inventory : MonoBehaviour
     
     private void SlotDataUpdate(GameObject Item, int Idx) //데이터 추가
     {
-        if(SlotData.ContainsKey(Idx)) //총을 먹기전에 해당 슬롯에 총이 존재할 경우
+        if(SlotList[Idx].transform.childCount != 0) //총을 먹기전에 해당 슬롯에 총이 존재할 경우
         {
             DropItem(Idx);
             SlotData.Add(Idx, new InventoryItem(Item));

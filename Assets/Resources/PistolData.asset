@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685f49eea863edf41bf7ed92dc33f487, type: 3}
   m_Name: PistolData
   m_EditorClassIdentifier: 
+  SlotTranform: {x: 0, y: 0, z: 0}
   GunType: Pistol
   Vertical_ReBound: 2
   Horizontal_ReBound: 2
@@ -19,5 +20,6 @@ MonoBehaviour:
   Fov: 60
   BulletMax: 12
   SubBullet: 24
+  SlotIdxData: 1
   FireBranch: 0c0000001800000024000000
   FireMode: 01000000
