@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     Dictionary<int, InventoryItem> SlotData; //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
-    private List<GameObject> SlotList;
+    [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
     private int slotIdx;
     public int SlotIdx
