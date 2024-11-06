@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdb552ad246bf240a4a0a5d57417203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gundata: {fileID: 11400000, guid: f82eb5677c74ccd4db016d53bda9e09c, type: 2}
+  gundata: {fileID: 0}

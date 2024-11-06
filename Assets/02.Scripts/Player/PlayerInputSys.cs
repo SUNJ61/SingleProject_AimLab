@@ -137,7 +137,7 @@ public class PlayerInputSys : MonoBehaviour
 
     private void OnReloadStarted(InputAction.CallbackContext context) // 장전 키 누름 (잠깐 동안만 활성화 되면됨. 코루틴 사용)
     {
-
+        playerFire.IsReload = true;
     }
 
     private void OnModeStarted(InputAction.CallbackContext context) // 총 모드 변경 키 누름

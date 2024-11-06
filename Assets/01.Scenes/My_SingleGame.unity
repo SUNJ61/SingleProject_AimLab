@@ -2037,6 +2037,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4744930257580395362, guid: c01e29f66bc6bff43b4c8a79313943c7, type: 3}
+      propertyPath: gundata
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5521057418623136536, guid: c01e29f66bc6bff43b4c8a79313943c7, type: 3}
       propertyPath: m_Name
       value: Ghost
@@ -9536,6 +9540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5289301547950322127, guid: bbad44269dbb8c04baa21e6e8ff92e6e, type: 3}
+      propertyPath: gundata
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 911940103149441735, guid: bbad44269dbb8c04baa21e6e8ff92e6e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.3462205
@@ -16350,6 +16358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1693539090932651543, guid: 5bd240cc61ab53f4599cfb55f7dddd10, type: 3}
+      propertyPath: gundata
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4980751772688367996, guid: 5bd240cc61ab53f4599cfb55f7dddd10, type: 3}
       propertyPath: m_Name
       value: MP5K
@@ -17185,6 +17197,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4896928667564179389, guid: c76744392c1467d478cac7d7ff5a9a59, type: 3}
+      propertyPath: gundata
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1757994434007665676, guid: c76744392c1467d478cac7d7ff5a9a59, type: 3}
       propertyPath: m_Name
       value: Kar98

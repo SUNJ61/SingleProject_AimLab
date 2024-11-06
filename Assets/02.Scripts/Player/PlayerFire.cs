@@ -19,6 +19,7 @@ public class PlayerFire : MonoBehaviour
             gunData = GunObj.GetComponent<Gun>().gundata;
             FireState = gunData.FireMode[0];
             HorizontalGunRebound = gunData.HorizontalReBound;
+            MaxBullet = gunData.BulletMax;
         }
     }
     private RaycastHit hit;
@@ -27,6 +28,7 @@ public class PlayerFire : MonoBehaviour
     private float HorizontalGunRebound = 0;
 
     private int ShootCount = 0;
+    private int MaxBullet = 0;
     private int fireState; //발사 모드 0 : 연사, 1 : 단발
     public int FireState
     {
@@ -44,7 +46,7 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    [SerializeField] bool isFire; //발사 유무
+    bool isFire; //발사 유무
     public bool IsFire
     {
         get { return isFire; }
@@ -60,11 +62,22 @@ public class PlayerFire : MonoBehaviour
             }
         }
     }
-    [SerializeField] bool canFire = false;
+    bool canFire = false;
     public bool CanFire
     {
         get { return canFire; }
         set { canFire = value; }
+    }
+    [SerializeField] bool isReload;
+    public bool IsReload
+    {
+        get { return isReload; }
+        set
+        {
+            isReload = value;
+            if(IsReload)
+                ReloadAction();
+        }
     }
 
     private void Awake()
@@ -93,9 +106,10 @@ public class PlayerFire : MonoBehaviour
             switch(FireState)
             {
                 case 0: //연발
-                    if (Time.time - prevTime > gunData.Delay)
+                    if (Time.time - prevTime > gunData.Delay && gunData.BulletMax != 0)
                     {
                         FireSpray(gunData.FireBranch);
+                        gunData.BulletMax -= 1;
                         prevTime = Time.time;
                     }
                     else //총을 쏘지 않을 때 반동 제거
@@ -106,9 +120,10 @@ public class PlayerFire : MonoBehaviour
                     break;
 
                 case 1: //단발
-                    if (Time.time - prevTime > gunData.Delay * 1.5f)
+                    if (Time.time - prevTime > gunData.Delay * 1.5f && gunData.BulletMax != 0)
                     {
                         playerMove.ApplyVerticalReBound(gunData.VerticalReBound);
+                        gunData.BulletMax -= 1;
                         prevTime = Time.time;
                         StartCoroutine(FireFalse(gunData.Delay * 1.2f));
                     }
@@ -138,6 +153,25 @@ public class PlayerFire : MonoBehaviour
             }
         }
         
+    }
+
+    private void ReloadAction() //장전 함수
+    {
+        if(gunData.BulletMax != MaxBullet && gunData.SubBullet != 0)
+        {
+            int loadBullet = MaxBullet - gunData.BulletMax;
+            if(loadBullet > gunData.SubBullet)
+            {
+                gunData.BulletMax += gunData.SubBullet;
+                gunData.SubBullet = 0;
+            }
+            else
+            {
+                gunData.BulletMax += loadBullet;
+                gunData.SubBullet -= loadBullet;
+            }
+        }
+        IsReload = false;
     }
 
     private void FireSpray(int[] branch) //총기 스프레이 적용 함수.
