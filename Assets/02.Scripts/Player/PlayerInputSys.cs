@@ -63,7 +63,6 @@ public class PlayerInputSys : MonoBehaviour
         playerActionMap.FindAction("Reload").started += OnReloadStarted;
         playerActionMap.FindAction("Mode").started += OnModeStarted;
         playerActionMap.FindAction("Action").started += OnActionStarted;
-        playerActionMap.FindAction("Action").canceled += OnActionCanceled;
         playerActionMap.FindAction("Drop").started += OnDropStarted;
         playerActionMap.FindAction("Inventory").started += OnInventoryStarted;
         playerActionMap.FindAction("Shop").started += OnShopStarted;
@@ -147,19 +146,14 @@ public class PlayerInputSys : MonoBehaviour
         FireState = FireMode[idx];
     }
 
-    private void OnActionStarted(InputAction.CallbackContext context) // 상호작용 키 누름
+    private void OnActionStarted(InputAction.CallbackContext context) // 상호작용 키 누름 (flase는 줍기 함수 진행 후 처리됨)
     {
         playerGetItem.IsActive = true;
     }
 
-    private void OnActionCanceled(InputAction.CallbackContext context) // 상호작용 키 땜
+    private void OnDropStarted(InputAction.CallbackContext context) // 버리기 키 누름
     {
-        playerGetItem.IsActive = false;
-    }
-
-    private void OnDropStarted(InputAction.CallbackContext context) // 버리기 키 누름 (잠깐 동안만 활성화 되면됨.)
-    {
-
+        playerGetItem.IsDrop = true;
     }
 
     private void OnInventoryStarted(InputAction.CallbackContext context) // 퀵 슬롯 키 누름 -> 이거 started하나면 될듯?

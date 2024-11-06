@@ -144,16 +144,20 @@ public class PlayerFire : MonoBehaviour
 
     private void ZoomAction()
     {
-        switch (ZoomState)
+        if(CanFire)
         {
-            case 0: //견착 모드 구현
-                PlayerCamera.m_Lens.FieldOfView = 60.0f;
-                break;
+            switch (ZoomState)
+            {
+                case 0: //견착 모드 구현
+                    PlayerCamera.m_Lens.FieldOfView = 60.0f;
+                    break;
 
-            case 1: //스코프 모드 구현
-                PlayerCamera.m_Lens.FieldOfView = Fov;
-                break;
+                case 1: //스코프 모드 구현
+                    PlayerCamera.m_Lens.FieldOfView = Fov;
+                    break;
+            }
         }
+        
     }
 
     private void FireSpray(int[] branch) //총기 스프레이 적용 함수.

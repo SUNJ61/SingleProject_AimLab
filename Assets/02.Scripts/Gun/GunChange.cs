@@ -21,10 +21,6 @@ public class GunChange : MonoBehaviour
         playerFire = GetComponent<PlayerFire>();
         playerInputSys = GetComponent<PlayerInputSys>();
     }
-    private void Start()
-    {
-        PlayerGunData = Resources.Load<GunData>("ARGunData");
-    }
 
     private void UpdateGunData()
     {

@@ -147,7 +147,7 @@ public class PlayerMove : MonoBehaviour
 
         currentXRot -= playerRot.y * rotSpeed * Time.deltaTime;
 
-        currentXRot = Mathf.Clamp(currentXRot - VerticalReboundAmount, -45f, 45f);
+        currentXRot = Mathf.Clamp(currentXRot - VerticalReboundAmount, -50f, 60f);
         currentYRot = Mathf.Clamp(currentYRot - HorizontalReboundAmount, -10.0f, 10.0f);
 
         Camera_Pivot.localRotation = Quaternion.Euler(currentXRot, currentYRot, 0f);

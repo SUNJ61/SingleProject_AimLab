@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     private readonly float delay = 0.1f;
 
-    private int slotIdx;
+    private int slotIdx = 0;
     public int SlotIdx
     {
         get { return slotIdx; }
@@ -52,19 +52,37 @@ public class Inventory : MonoBehaviour
         {
             case 0: //mg, ar ,sr 착용
                 ActiveSlot(SlotIdx);
+                GunDataUpdate(SlotIdx);
                 break;
 
             case 1: //권총
                 ActiveSlot(SlotIdx);
+                GunDataUpdate(SlotIdx);
                 break;
 
             case 2: //칼
                 ActiveSlot(SlotIdx);
+                GunDataUpdate(SlotIdx);
                 break;
 
             case 3: //조건문 추가 필요, 공격자만 case에 들어오도록
                 ActiveSlot(SlotIdx);
+                GunDataUpdate(SlotIdx);
                 break;
+        }
+    }
+
+    private void GunDataUpdate(int SlotIdx)
+    {
+        if (SlotList[SlotIdx].transform.childCount != 0 && (SlotIdx == 0 || SlotIdx == 1))
+        {
+            Gun gun = SlotData[SlotIdx].Item.GetComponent<Gun>();
+            playerGunChange.PlayerGunData = gun.gundata;
+            playerFire.CanFire = true;
+        }
+        else
+        {
+            playerFire.CanFire = false;
         }
     }
 
@@ -97,8 +115,18 @@ public class Inventory : MonoBehaviour
         Item.transform.localPosition = gun.gundata.SlotTranform;
         Item.transform.localRotation = Quaternion.identity;
 
-        playerGunChange.PlayerGunData = gun.gundata;
+        if(SlotIdx == gun.gundata.SlotIdxData)
+            playerGunChange.PlayerGunData = gun.gundata;
+
         playerFire.CanFire = true;
+    }
+
+    public void PlayerDropItem()
+    {
+        if(SlotList[SlotIdx].transform.childCount != 0)
+        {
+            DropItem(SlotIdx);
+        }
     }
 
     private void DropItem(int Idx) //Idx가 0과 1일 때만 가능.
@@ -107,12 +135,13 @@ public class Inventory : MonoBehaviour
         {
             GameObject gun = SlotList[Idx].transform.GetChild(0).gameObject;
             gun.transform.parent = null; //(부모제거) 하이라키 공간으로 이동
+            playerFire.CanFire = false;
             DeleteSlotData(Idx); //드랍후 데이터 삭제.
             
             MeshCollider gunmesh = gun.GetComponent<MeshCollider>();
             Rigidbody gunrb = gun.GetComponent<Rigidbody>();
 
-            gun.transform.position = transform.position + new Vector3(0f, 0f, 1.0f);
+            gun.transform.position = transform.position + (transform.forward * 1.5f);
             gunmesh.isTrigger = false;
             gunrb.isKinematic = false;
         }
