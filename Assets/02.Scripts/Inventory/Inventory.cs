@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Dictionary<int, InventoryItem> SlotData = new Dictionary<int, InventoryItem>(); //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
+    public Dictionary<int, InventoryItem> SlotData = new Dictionary<int, InventoryItem>(); //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
     [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
     PlayerFire playerFire;

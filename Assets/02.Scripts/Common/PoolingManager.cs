@@ -6,14 +6,19 @@ public class PoolingManager : MonoBehaviour
     public static PoolingManager instance;
     public Dictionary<int, PoolingData> Data = new Dictionary<int, PoolingData>();
 
-    private List<GameObject> SoundBox_Pool;
+    [SerializeField] List<GameObject> SoundBox_Pool;
+    [SerializeField] List<GameObject> Target_Pool;
 
     private GameObject SoundBox_Prefab;
+    private GameObject Target_Prefab;
 
     private readonly int SoundBox_Max = 30;
+    private readonly int Target_Max = 10;
 
     private readonly string SoundBox_Group = "SoundBoxGroup";
+    private readonly string Target_Group = "TargetGroup";
     private readonly string SoundBox_Obj = "SoundBox";
+    private readonly string Target_Obj = "Target";
     void Awake()
     {
         if (instance == null)
@@ -22,8 +27,10 @@ public class PoolingManager : MonoBehaviour
             Destroy(gameObject);
 
         SoundBox_Prefab = Resources.Load<GameObject>(SoundBox_Obj);
+        Target_Prefab = Resources.Load<GameObject>(Target_Obj);
 
-        //Data.Add(0, new PoolingData(SoundBox_Pool, SoundBox_Prefab, SoundBox_Group, SoundBox_Obj, SoundBox_Max));
+        Data.Add(0, new PoolingData(SoundBox_Pool, SoundBox_Prefab, SoundBox_Group, SoundBox_Obj, SoundBox_Max));
+        Data.Add(1, new PoolingData(Target_Pool, Target_Prefab, Target_Group, Target_Obj, Target_Max));
 
         for (int i = 0; i < Data.Count; i++)
             Pooling(i, Data);
