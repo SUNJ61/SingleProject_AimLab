@@ -8,7 +8,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
     PlayerFire playerFire;
-    GunChange playerGunChange;
 
     private float Timeprev;
 
@@ -29,7 +28,6 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         PlayerSlot = transform.GetChild(0).GetChild(1).transform;
-        playerGunChange = GetComponent<GunChange>();
         playerFire = GetComponent<PlayerFire>();
 
         for(int i = 0; i < PlayerSlot.childCount; i++)
@@ -76,8 +74,7 @@ public class Inventory : MonoBehaviour
     {
         if (SlotList[SlotIdx].transform.childCount != 0 && (SlotIdx == 0 || SlotIdx == 1))
         {
-            Gun gun = SlotData[SlotIdx].Item.GetComponent<Gun>();
-            playerGunChange.PlayerGunData = gun.gundata;
+            playerFire.GunObj = SlotData[SlotIdx].Gun;
             playerFire.CanFire = true;
         }
         else
@@ -116,9 +113,10 @@ public class Inventory : MonoBehaviour
         Item.transform.localRotation = Quaternion.identity;
 
         if(SlotIdx == gun.gundata.SlotIdxData)
-            playerGunChange.PlayerGunData = gun.gundata;
-
-        playerFire.CanFire = true;
+        {
+            playerFire.GunObj = Item;
+            playerFire.CanFire = true;
+        }
     }
 
     public void PlayerDropItem()

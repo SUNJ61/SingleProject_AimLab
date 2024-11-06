@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685f49eea863edf41bf7ed92dc33f487, type: 3}
   m_Name: ARGunData
   m_EditorClassIdentifier: 
+  SlotTranform: {x: 0, y: 0, z: 0}
   GunType: AR
-  Vertical_ReBound: 2.5
-  Horizontal_ReBound: 0.8
+  VerticalReBound: 2.5
+  HorizontalReBound: 0.8
   Delay: 0.1
   Fov: 55
   BulletMax: 25
   SubBullet: 50
+  SlotIdxData: 0
   FireBranch: 070000000b00000013000000
   FireMode: 0000000001000000

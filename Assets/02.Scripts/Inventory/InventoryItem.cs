@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class InventoryItem
 {
-    public GameObject Item;
+    public GameObject Gun;
 
-    public InventoryItem (GameObject item)
+    public InventoryItem (GameObject gun)
     {
-        Item = item;
+        Gun = gun;
     }
 }

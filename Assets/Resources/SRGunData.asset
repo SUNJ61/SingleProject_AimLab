@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotTranform: {x: 0, y: 0.16, z: 0}
   GunType: SR
-  Vertical_ReBound: 3
-  Horizontal_ReBound: 0
+  VerticalReBound: 4
+  HorizontalReBound: 0
   Delay: 1
   Fov: 15
   BulletMax: 5

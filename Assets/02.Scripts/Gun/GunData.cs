@@ -7,8 +7,8 @@ public class GunData : ScriptableObject
 
     public string GunType;
 
-    public float Vertical_ReBound;
-    public float Horizontal_ReBound;
+    public float VerticalReBound;
+    public float HorizontalReBound;
     public float Delay;
     public float Fov; 
 

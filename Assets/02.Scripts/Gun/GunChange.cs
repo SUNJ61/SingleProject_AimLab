@@ -24,11 +24,11 @@ public class GunChange : MonoBehaviour
 
     private void UpdateGunData()
     {
-        playerFire.Delay = PlayerGunData.Delay;
-        playerFire.VerticalGunRebound = PlayerGunData.Vertical_ReBound;
-        playerFire.HorizontalGunRebound = PlayerGunData.Horizontal_ReBound;
-        playerFire.FireBranch = PlayerGunData.FireBranch;
-        playerFire.Fov = PlayerGunData.Fov;
-        playerInputSys.FireMode = PlayerGunData.FireMode;
+        //playerFire.Delay = PlayerGunData.Delay;
+        //playerFire.VerticalGunRebound = PlayerGunData.VerticalReBound;
+        //playerFire.HorizontalGunRebound = PlayerGunData.HorizontalReBound;
+        //playerFire.FireBranch = PlayerGunData.FireBranch;
+        //playerFire.Fov = PlayerGunData.Fov;
+        //playerInputSys.FireMode = PlayerGunData.FireMode;
     }
 }

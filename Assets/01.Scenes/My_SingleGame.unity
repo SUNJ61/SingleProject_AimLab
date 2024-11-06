@@ -1589,7 +1589,6 @@ GameObject:
   - component: {fileID: 132049434}
   - component: {fileID: 132049442}
   - component: {fileID: 132049439}
-  - component: {fileID: 132049440}
   - component: {fileID: 132049441}
   m_Layer: 3
   m_Name: Player
@@ -1860,26 +1859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b681c73b650c4a4d90f1da0ac0a8771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalGunRebound: 0
-  horizontalGunRebound: 0
-  delay: 0.2
-  fov: 0
-  fireBranch: 
   isFire: 0
   canFire: 0
---- !u!114 &132049440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132049428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca8740b1729902489ee82bbe8874f3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerGunData: {fileID: 0}
 --- !u!114 &132049441
 MonoBehaviour:
   m_ObjectHideFlags: 0
