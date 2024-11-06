@@ -98,7 +98,7 @@ public class PlayerFire : MonoBehaviour
 
     private void Update()
     {
-        if(isFire) return;
+        if(!isFire) return;
 
         if (CanFire)
         {

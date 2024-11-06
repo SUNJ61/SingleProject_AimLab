@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Dictionary<int, InventoryItem> SlotData; //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
+    public static Dictionary<int, InventoryItem> SlotData = new Dictionary<int, InventoryItem>(); //슬롯 번호가 key값, 들어있는 정보는 총기 데이터
     [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
     PlayerFire playerFire;
     GunChange playerGunChange;
+
+    private float Timeprev;
+
+    private readonly float delay = 0.1f;
 
     private int slotIdx;
     public int SlotIdx
@@ -21,9 +25,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
+
     private void Awake()
     {
-        PlayerSlot = transform.GetChild(1).transform;
+        PlayerSlot = transform.GetChild(0).GetChild(1).transform;
         playerGunChange = GetComponent<GunChange>();
         playerFire = GetComponent<PlayerFire>();
 
@@ -31,6 +36,8 @@ public class Inventory : MonoBehaviour
         {
             SlotList.Add(PlayerSlot.GetChild(i).gameObject);
         }
+
+        Timeprev = Time.time;
     }
 
     private void OnEnable()
@@ -75,13 +82,20 @@ public class Inventory : MonoBehaviour
     public void GetItem(GameObject Item) //아이템을 얻을 때 (아이템 습득, 아이템 구매에서 호출)
     {
         Gun gun = Item.GetComponent<Gun>();
+        MeshCollider gunmesh = Item.GetComponent<MeshCollider>();
+        Rigidbody gunrb = Item.GetComponent<Rigidbody>();
+
         int Idx = gun.gundata.SlotIdxData;
-        Debug.Log(Idx);
+
         SlotDataUpdate(Item, Idx);
+
+        gunmesh.isTrigger = true;
+        gunrb.isKinematic = true;
 
         Transform itemSlot = SlotList[Idx].transform;
         Item.transform.SetParent(itemSlot);
         Item.transform.localPosition = gun.gundata.SlotTranform;
+        Item.transform.localRotation = Quaternion.identity;
 
         playerGunChange.PlayerGunData = gun.gundata;
         playerFire.CanFire = true;
@@ -91,7 +105,7 @@ public class Inventory : MonoBehaviour
     {
         if(Idx == 0 || Idx == 1)
         {
-            GameObject gun = SlotList[Idx];
+            GameObject gun = SlotList[Idx].transform.GetChild(0).gameObject;
             gun.transform.parent = null; //(부모제거) 하이라키 공간으로 이동
             DeleteSlotData(Idx); //드랍후 데이터 삭제.
             
@@ -99,7 +113,7 @@ public class Inventory : MonoBehaviour
             Rigidbody gunrb = gun.GetComponent<Rigidbody>();
 
             gun.transform.position = transform.position + new Vector3(0f, 0f, 1.0f);
-            gunmesh.enabled = true;
+            gunmesh.isTrigger = false;
             gunrb.isKinematic = false;
         }
     }
