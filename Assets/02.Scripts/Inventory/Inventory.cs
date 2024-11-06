@@ -9,10 +9,6 @@ public class Inventory : MonoBehaviour
     Transform PlayerSlot;
     PlayerFire playerFire;
 
-    private float Timeprev;
-
-    private readonly float delay = 0.1f;
-
     private int slotIdx = 0;
     public int SlotIdx
     {
@@ -34,8 +30,6 @@ public class Inventory : MonoBehaviour
         {
             SlotList.Add(PlayerSlot.GetChild(i).gameObject);
         }
-
-        Timeprev = Time.time;
     }
 
     private void OnEnable()
