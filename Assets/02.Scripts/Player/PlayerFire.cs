@@ -107,7 +107,7 @@ public class PlayerFire : MonoBehaviour
             case 0: //연발
                 if (Time.time - prevTime > gunData.Delay && gunData.BulletMax != 0)
                 {
-                    if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5) && !GameManager.instance.isGameStart)
+                    if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5))
                     {
                         InGameUIManager.instance.RandomShootGameButtonHit(hit);
                     }

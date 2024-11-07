@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     private List<Transform> RandomShootGamespawnPoint;
     private GameObject currentTarget;
+    private Coroutine RandomShootGameCorutine;
 
     private float[] RandomShootGameLevelDelay = new float[2] {1.0f , 0.6f};
 
@@ -33,24 +34,36 @@ public class GameManager : MonoBehaviour
 
     public void RandomShootGame() //필드 UI를 통해 상호작용하면 게임 스타트
     {
-        isGameStart = true;
-        Score = 0;
-        StartCoroutine(RandomShootGameStart(RandomShootGameLevelDelay[RandomShootGameLevel])); //난이도에 따라 입력 값 조절   
+        if(!isGameStart)
+        {
+            isGameStart = true;
+            Score = 0;
+            RandomShootGameCorutine = StartCoroutine(RandomShootGameStart(RandomShootGameLevelDelay[RandomShootGameLevel])); //난이도에 따라 입력 값 조절   
+        }
     }
 
     public void RandomShootGameStop()
     {
-        StopCoroutine(RandomShootGameStart(RandomShootGameLevelDelay[RandomShootGameLevel]));
-        currentTarget.SetActive(false);
+        if(RandomShootGameCorutine != null)
+            StopCoroutine(RandomShootGameCorutine);
+
+        if(currentTarget != null)
+            currentTarget.SetActive(false);
+
+        isGameStart = false;
     }
 
     public void RandomShootGameLevelChange()
     {
-        RandomShootGameLevel++;
-        if(RandomShootGameLevel > 1)
-            RandomShootGameLevel = 0;
+        if(!isGameStart)
+        {
+            RandomShootGameLevel++;
+            if(RandomShootGameLevel > 1)
+                RandomShootGameLevel = 0;
 
-        InGameUIManager.instance.RandomShootGameLevelText(RandomShootGameLevel);
+            InGameUIManager.instance.RandomShootGameLevelText(RandomShootGameLevel);
+        }
+
     }
 
     IEnumerator RandomShootGameStart(float delay)
