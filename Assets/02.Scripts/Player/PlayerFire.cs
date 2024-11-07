@@ -101,40 +101,47 @@ public class PlayerFire : MonoBehaviour
 
     private void FireAction()
     {
-        if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f))
-        {
-            switch(FireState)
-            {
-                case 0: //연발
-                    if (Time.time - prevTime > gunData.Delay && gunData.BulletMax != 0)
-                    {
-                        FireSpray(gunData.FireBranch);
-                        gunData.BulletMax -= 1;
-                        prevTime = Time.time;
-                    }
-                    else //총을 쏘지 않을 때 반동 제거
-                    {
-                        playerMove.ApplyVerticalReBound(0f);
-                        playerMove.ApplyHorizontalReBound(0f);
-                    }
-                    break;
 
-                case 1: //단발
-                    if (Time.time - prevTime > gunData.Delay * 1.5f && gunData.BulletMax != 0)
+        switch (FireState)
+        {
+            case 0: //연발
+                if (Time.time - prevTime > gunData.Delay && gunData.BulletMax != 0)
+                {
+                    if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5) && !GameManager.instance.isGameStart)
                     {
-                        playerMove.ApplyVerticalReBound(gunData.VerticalReBound);
-                        gunData.BulletMax -= 1;
-                        prevTime = Time.time;
-                        StartCoroutine(FireFalse(gunData.Delay * 1.2f));
+                        InGameUIManager.instance.RandomShootGameUI(hit);
                     }
-                    else //총을 쏘지 않을 때 반동 제거
+                    FireSpray(gunData.FireBranch);
+                    gunData.BulletMax -= 1;
+                    prevTime = Time.time;
+                }
+                else //총을 쏘지 않을 때 반동 제거
+                {
+                    playerMove.ApplyVerticalReBound(0f);
+                    playerMove.ApplyHorizontalReBound(0f);
+                }
+                break;
+
+            case 1: //단발
+                if (Time.time - prevTime > gunData.Delay * 1.5f && gunData.BulletMax != 0)
+                {
+                    if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5))
                     {
-                        playerMove.ApplyVerticalReBound(0f);
-                        playerMove.ApplyHorizontalReBound(0f);
+                        InGameUIManager.instance.RandomShootGameUI(hit);
                     }
-                    break;
-            }
+                    playerMove.ApplyVerticalReBound(gunData.VerticalReBound);
+                    gunData.BulletMax -= 1;
+                    prevTime = Time.time;
+                    StartCoroutine(FireFalse(gunData.Delay * 1.2f));
+                }
+                else //총을 쏘지 않을 때 반동 제거
+                {
+                    playerMove.ApplyVerticalReBound(0f);
+                    playerMove.ApplyHorizontalReBound(0f);
+                }
+                break;
         }
+
     }
 
     private void ZoomAction()

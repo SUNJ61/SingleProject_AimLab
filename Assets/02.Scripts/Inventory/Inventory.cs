@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<GameObject> SlotList;
     Transform PlayerSlot;
     PlayerFire playerFire;
+    PlayerInputSys playerInputSys;
 
     private int slotIdx = 0;
     public int SlotIdx
@@ -25,6 +26,7 @@ public class Inventory : MonoBehaviour
     {
         PlayerSlot = transform.GetChild(0).GetChild(1).transform;
         playerFire = GetComponent<PlayerFire>();
+        playerInputSys = GetComponent<PlayerInputSys>();
 
         for(int i = 0; i < PlayerSlot.childCount; i++)
         {
@@ -69,6 +71,7 @@ public class Inventory : MonoBehaviour
         if (SlotList[SlotIdx].transform.childCount != 0 && (SlotIdx == 0 || SlotIdx == 1))
         {
             playerFire.GunObj = SlotData[SlotIdx].Gun;
+            playerInputSys.FireMode = SlotData[SlotIdx].gunData.FireMode;
             playerFire.CanFire = true;
         }
         else
@@ -109,6 +112,7 @@ public class Inventory : MonoBehaviour
         if(SlotIdx == gun.gundata.SlotIdxData)
         {
             playerFire.GunObj = Item;
+            playerInputSys.FireMode = gun.gundata.FireMode;
             playerFire.CanFire = true;
         }
     }
