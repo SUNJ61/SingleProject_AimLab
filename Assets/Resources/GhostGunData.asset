@@ -21,5 +21,7 @@ MonoBehaviour:
   BulletMax: 12
   SubBullet: 24
   SlotIdxData: 1
+  BodyDamage: 25
+  HeadDamage: 90
   FireBranch: 0c0000001800000024000000
   FireMode: 01000000

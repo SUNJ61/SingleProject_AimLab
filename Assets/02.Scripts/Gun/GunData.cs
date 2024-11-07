@@ -15,6 +15,8 @@ public class GunData : ScriptableObject
     public int BulletMax;
     public int SubBullet;
     public int SlotIdxData;
+    public int BodyDamage;
+    public int HeadDamage;
 
     public int[] FireBranch = new int[3];
     public int[] FireMode;

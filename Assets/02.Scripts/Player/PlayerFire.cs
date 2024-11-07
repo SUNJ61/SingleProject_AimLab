@@ -111,6 +111,10 @@ public class PlayerFire : MonoBehaviour
                     {
                         InGameUIManager.instance.RandomShootGameUI(hit);
                     }
+                    if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //타겟에 맞았을 때
+                    {
+                        hit.transform.gameObject.SendMessage("HitDamage", 100); //나중에 적 npc제데로 만들면 수치 고치기.
+                    }
                     FireSpray(gunData.FireBranch);
                     gunData.BulletMax -= 1;
                     prevTime = Time.time;
