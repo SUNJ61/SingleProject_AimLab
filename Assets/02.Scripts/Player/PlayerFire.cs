@@ -109,7 +109,7 @@ public class PlayerFire : MonoBehaviour
                 {
                     if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5) && !GameManager.instance.isGameStart)
                     {
-                        InGameUIManager.instance.RandomShootGameUI(hit);
+                        InGameUIManager.instance.RandomShootGameButtonHit(hit);
                     }
                     if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //타겟에 맞았을 때
                     {
@@ -131,7 +131,7 @@ public class PlayerFire : MonoBehaviour
                 {
                     if (Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 5))
                     {
-                        InGameUIManager.instance.RandomShootGameUI(hit);
+                        InGameUIManager.instance.RandomShootGameButtonHit(hit);
                     }
                     playerMove.ApplyVerticalReBound(gunData.VerticalReBound);
                     gunData.BulletMax -= 1;
