@@ -98,6 +98,7 @@ public class Inventory : MonoBehaviour
         Rigidbody gunrb = Item.GetComponent<Rigidbody>();
 
         int Idx = gun.gundata.SlotIdxData;
+        gun.GetState();
 
         SlotDataUpdate(Item, Idx);
 
@@ -130,14 +131,16 @@ public class Inventory : MonoBehaviour
         if(Idx == 0 || Idx == 1)
         {
             GameObject gun = SlotList[Idx].transform.GetChild(0).gameObject;
+            Gun gunscript = gun.GetComponent<Gun>();
             gun.transform.parent = null; //(부모제거) 하이라키 공간으로 이동
             playerFire.CanFire = false;
-            DeleteSlotData(Idx); //드랍후 데이터 삭제.
+            DeleteSlotData(Idx); //드랍후 슬롯 데이터 삭제.
             
             MeshCollider gunmesh = gun.GetComponent<MeshCollider>();
             Rigidbody gunrb = gun.GetComponent<Rigidbody>();
 
             gun.transform.position = transform.position + (transform.forward * 1.5f);
+            gunscript.DropState();
             gunmesh.isTrigger = false;
             gunrb.isKinematic = false;
         }

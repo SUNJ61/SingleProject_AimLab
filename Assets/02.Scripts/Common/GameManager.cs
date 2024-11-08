@@ -30,6 +30,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         RandomShootGamespawnPoint = SpawnManager.instance.GetPoint(RandomShootGamespawnPointName);
+        CursorCtrl(InGameUIManager.instance.activeShopUI);
+    }
+
+    public void CursorCtrl(bool active)
+    {
+        switch(active)
+        {
+            case true:
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            break;
+
+            case false:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            break;
+        }
     }
 
     public void RandomShootGame() //필드 UI를 통해 상호작용하면 게임 스타트
@@ -45,7 +62,10 @@ public class GameManager : MonoBehaviour
     public void RandomShootGameStop()
     {
         if(RandomShootGameCorutine != null)
+        {
             StopCoroutine(RandomShootGameCorutine);
+            RandomShootGameIdx = 0;
+        }
 
         if(currentTarget != null)
             currentTarget.SetActive(false);
@@ -79,7 +99,10 @@ public class GameManager : MonoBehaviour
         }
 
         if(RandomShootGameIdx == 20)
+        {
             isGameStart = false;
+            RandomShootGameIdx = 0;
+        }
         
         InGameUIManager.instance.RandomShootGameScore(Score);
     }

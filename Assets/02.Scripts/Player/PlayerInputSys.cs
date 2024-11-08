@@ -170,13 +170,13 @@ public class PlayerInputSys : MonoBehaviour
             SendInventoryIdx(3);
     }
 
-    private void OnShopStarted(InputAction.CallbackContext context) // 상점 열기 키 누름 -> 토글로 만들어야해서 started하나면 될듯?
+    private void OnShopStarted(InputAction.CallbackContext context) // 상점 열기 키 누름
     {
-
+        InGameUIManager.instance.ShopPanelActive(!InGameUIManager.instance.activeShopUI);
     }
 
-    private void OnEscapeStarted(InputAction.CallbackContext context) // 닫기 키 누름 -> 잠깐 동안만 활성화 되면됨.
+    private void OnEscapeStarted(InputAction.CallbackContext context) // 닫기 키 누름
     {
-
+        InGameUIManager.instance.EscapeUI = true;
     }
 }

@@ -76,9 +76,6 @@ public class PlayerMove : MonoBehaviour
         Camera_Pivot = transform.GetChild(0).GetComponent<Transform>();
 
         Walk = Resources.Load<AudioClip>("Sound/Player/Walk");
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Start()

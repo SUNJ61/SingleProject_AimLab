@@ -58,4 +58,22 @@ public class PlayerGetItem : MonoBehaviour
     {
         playerInventory.PlayerDropItem();
     }
+
+    public void BuyGun(int gunidx)
+    {
+          GameObject gun = PoolingManager.instance.GetObject(gunidx);
+          if(gun != null)
+          {
+               gun.SetActive(true);
+               StartCoroutine(BuyDealy(gun));
+          }
+          else
+               Debug.Log("너무 많은 총기를 소환했다.");
+    }
+
+    IEnumerator BuyDealy(GameObject gun)
+    {
+          yield return new WaitForSeconds(0.05f);
+          playerInventory.GetItem(gun);
+    }
 }
