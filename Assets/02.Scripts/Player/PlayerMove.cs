@@ -94,8 +94,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Player_Moving()
     {
-        Vector3 move = transform.TransformDirection(PlayerDir);
-        Player_Controller.Move(move * moveSpeed * Time.deltaTime);
+        if (!GameManager.instance.isTeleport)
+        {
+            Vector3 move = transform.TransformDirection(PlayerDir);
+            Player_Controller.Move(move * moveSpeed * Time.deltaTime);
+        }
     }
 
     private void CheckMoveState()

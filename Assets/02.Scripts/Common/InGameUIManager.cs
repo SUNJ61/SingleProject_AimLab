@@ -10,10 +10,13 @@ public class InGameUIManager : MonoBehaviour
 
      private GameObject InGameUICanvas;
      private GameObject RandomShootGameScoreBoard;
+     private GameObject AIGunMatchScoreBoard;
      private GameObject ShopPanel;
      private GameObject OptionPanel;
      private TMP_Text RandomShootGameScoreTxt;
      private TMP_Text RandomShootGameLevelTxt;
+     private TMP_Text AIGunMatchTimeTxt;
+     private TMP_Text AIGunMatchLevelTxt;
 
 
      public bool areadyUI = false;
@@ -47,12 +50,15 @@ public class InGameUIManager : MonoBehaviour
                Destroy(gameObject);
 
           RandomShootGameScoreBoard = GameObject.Find("RandomShootGameScoreBoard");
+          AIGunMatchScoreBoard = GameObject.Find("AIGunMatchScoreBoard");
           InGameUICanvas = GameObject.Find("InGameCanvas");
           ShopPanel = InGameUICanvas.transform.GetChild(1).gameObject;
           OptionPanel = InGameUICanvas.transform.GetChild(2).gameObject;
 
           RandomShootGameScoreTxt = RandomShootGameScoreBoard.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
           RandomShootGameLevelTxt = RandomShootGameScoreBoard.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+          AIGunMatchTimeTxt = AIGunMatchScoreBoard.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+          AIGunMatchLevelTxt = AIGunMatchScoreBoard.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
      }
 
      public void ShopPanelActive(bool active)
@@ -89,18 +95,19 @@ public class InGameUIManager : MonoBehaviour
           RandomShootGameScoreTxt.text = $"Score : {score}";
      }
 
-     public void RandomShootGameLevelText(int level)
+     public void RandomShootGameLevelText(string level)
      {
-          switch(level)
-          {
-               case 0:
-                    RandomShootGameLevelTxt.text = "Level : Normal";
-               break;
+          RandomShootGameLevelTxt.text = $"Level : {level}";
+     }
 
-               case 1:
-                    RandomShootGameLevelTxt.text = "Level : Hard";
-               break;
-          }
+     public void AIGunMatchTimeText(float time)
+     {
+          AIGunMatchTimeTxt.text = $"Time : {time}";
+     }
+
+     public void AIGunMatchLevelText(string level)
+     {
+          AIGunMatchLevelTxt.text = $"Level : {level}";
      }
 
      public void ExitGame()
