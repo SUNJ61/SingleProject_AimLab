@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int AIGunMatchLevelIdx = 0;
     public int Score = 0;
 
-    public bool isGameover;
-    public bool isGameStart;
-    public bool isTeleport;
+    public bool isGameover = false;
+    public bool isGameStart = false;
+    public bool isTeleport = false;
     private void Awake()
     {
         if (instance == null)
@@ -155,16 +155,14 @@ public class GameManager : MonoBehaviour
     {
         isGameStart = false;
         isTeleport = true;
-
         StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[2]));
     }
 
     private IEnumerator TeleportPlayer(Transform pos)
     {
-        Player.transform.position = pos.position;
-
         yield return new WaitForSeconds(0.1f);
-
+        Player.transform.position = pos.position;
+        yield return new WaitForSeconds(0.1f);
         isTeleport = false;
     }
 
