@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetHealth : HealthUpdate
+public class DummyHealth : HealthUpdate
 {
    public override void HitDamage(int damage)
    {

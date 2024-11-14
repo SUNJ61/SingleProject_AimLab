@@ -135,7 +135,7 @@ public class PlayerInputSys : MonoBehaviour
         playerFire.ZoomState = 0;
     }
 
-    private void OnReloadStarted(InputAction.CallbackContext context) // 장전 키 누름 (잠깐 동안만 활성화 되면됨. 코루틴 사용)
+    private void OnReloadStarted(InputAction.CallbackContext context) // 장전 키 누름
     {
         playerFire.IsReload = true;
     }

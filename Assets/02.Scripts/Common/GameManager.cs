@@ -132,12 +132,9 @@ public class GameManager : MonoBehaviour
         {
             isGameStart = true;
             isTeleport =true;
-            AIGunMatchSetting(AIGunMatchLevelIdx); //게임 세팅
-
             ClearTime = 0f;
-            Player.transform.position = AIGunMatchPlayerSpawnPoint[AIGunMatchLevelIdx].transform.position;
-
-            StartCoroutine(TeleportDelay());
+            AIGunMatchSetting(AIGunMatchLevelIdx); //게임 세팅
+            StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[AIGunMatchLevelIdx]));
             StartCoroutine(AIGunMatchTimer());
         }
     }
@@ -159,13 +156,13 @@ public class GameManager : MonoBehaviour
         isGameStart = false;
         isTeleport = true;
 
-        Player.transform.position = AIGunMatchPlayerSpawnPoint[2].transform.position;
-
-        StartCoroutine(TeleportDelay());
+        StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[2]));
     }
 
-    private IEnumerator TeleportDelay()
+    private IEnumerator TeleportPlayer(Transform pos)
     {
+        Player.transform.position = pos.position;
+
         yield return new WaitForSeconds(0.1f);
 
         isTeleport = false;
@@ -175,12 +172,13 @@ public class GameManager : MonoBehaviour
     {
         switch(AIGunMatchLevel[idx])
         {
-            case "Attacker":
-            //플레이어 태그 변경.
+            case "Attacker": //공격몹 6개 소환
+            Player.tag = AIGunMatchLevel[idx];
+            SpawnManager.instance.SetActiveRandomPos(AIGunMatchAttackerSpawnPoint, 6);
                 break;
 
             case "Defender":
-            //플레이어 태그 변경.
+            Player.tag = AIGunMatchLevel[idx];
                 break; 
         }
     }

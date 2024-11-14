@@ -7,39 +7,44 @@ public class PoolingManager : MonoBehaviour
     public Dictionary<int, PoolingData> Data = new Dictionary<int, PoolingData>();
 
     [SerializeField] List<GameObject> SoundBox_Pool;
-    [SerializeField] List<GameObject> Target_Pool;
+    [SerializeField] List<GameObject> Dummy_Pool;
     [SerializeField] List<GameObject> AR_Pool;
     [SerializeField] List<GameObject> MG_Pool;
     [SerializeField] List<GameObject> SR_Pool;
     [SerializeField] List<GameObject> PST_Pool;
+    [SerializeField] List<GameObject> Target_Pool;
 
     private GameObject SoundBox_Prefab;
-    private GameObject Target_Prefab;
+    private GameObject Dummy_Prefab;
     private GameObject AR_Prefab;
     private GameObject MG_Prefab;
     private GameObject SR_Prefab;
     private GameObject PST_Prefab;
+    private GameObject Target_Prefab;
 
     private readonly int SoundBox_Max = 30;
-    private readonly int Target_Max = 10;
+    private readonly int Dummy_Max = 3;
     private readonly int AR_Max = 10;
     private readonly int MG_Max = 10;
     private readonly int SR_Max = 10;
     private readonly int PST_Max = 10;
+    private readonly int Target_Max = 6;
 
     private readonly string SoundBox_Group = "SoundBoxGroup";
-    private readonly string Target_Group = "TargetGroup";
+    private readonly string Dummy_Group = "DummyGroup";
     private readonly string AR_Group = "ARGroup";
     private readonly string MG_Group = "MGGroup";
     private readonly string SR_Group = "SRGroup";
     private readonly string PST_Group = "PSTGroup";
+    private readonly string Target_Group = "TargetGroup";
 
     private readonly string SoundBox_Obj = "SoundBox";
-    private readonly string Target_Obj = "Target";
+    private readonly string Dummy_Obj = "Dummy";
     private readonly string AR_Obj = "M4";
     private readonly string MG_Obj = "MP5K";
     private readonly string SR_Obj = "Kar98";
     private readonly string PST_Obj = "Ghost";
+    private readonly string Target_Obj = "Target";
     void Awake()
     {
         if (instance == null)
@@ -48,18 +53,20 @@ public class PoolingManager : MonoBehaviour
             Destroy(gameObject);
 
         SoundBox_Prefab = Resources.Load<GameObject>(SoundBox_Obj);
-        Target_Prefab = Resources.Load<GameObject>(Target_Obj);
+        Dummy_Prefab = Resources.Load<GameObject>(Dummy_Obj);
         AR_Prefab = Resources.Load<GameObject>(AR_Obj);
         MG_Prefab = Resources.Load<GameObject>(MG_Obj);
         SR_Prefab = Resources.Load<GameObject>(SR_Obj);
         PST_Prefab = Resources.Load<GameObject>(PST_Obj);
+        Target_Prefab = Resources.Load<GameObject>(Target_Obj);
 
         Data.Add(0, new PoolingData(SoundBox_Pool, SoundBox_Prefab, SoundBox_Group, SoundBox_Obj, SoundBox_Max));
-        Data.Add(1, new PoolingData(Target_Pool, Target_Prefab, Target_Group, Target_Obj, Target_Max));
+        Data.Add(1, new PoolingData(Dummy_Pool, Dummy_Prefab, Dummy_Group, Dummy_Obj, Dummy_Max));
         Data.Add(2, new PoolingData(AR_Pool, AR_Prefab, AR_Group, AR_Obj, AR_Max));
         Data.Add(3, new PoolingData(MG_Pool, MG_Prefab, MG_Group, MG_Obj, MG_Max));
         Data.Add(4, new PoolingData(SR_Pool, SR_Prefab, SR_Group, SR_Obj, SR_Max));
         Data.Add(5, new PoolingData(PST_Pool, PST_Prefab, PST_Group, PST_Obj, PST_Max));
+        Data.Add(6, new PoolingData(Target_Pool, Target_Prefab, Target_Group, Target_Obj, Target_Max));
 
         for (int i = 0; i < Data.Count; i++)
             Pooling(i, Data);

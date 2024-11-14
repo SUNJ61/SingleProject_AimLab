@@ -62,6 +62,7 @@ public class SpawnManager : MonoBehaviour
             int idx = GetRandomIdx(objIdxList);
             ex.transform.parent = SpawnPoint[idx];
             ex.transform.position = SpawnPoint[idx].position;
+            ex.transform.rotation = SpawnPoint[idx].rotation;
             ex.SetActive(true);
         }
 
