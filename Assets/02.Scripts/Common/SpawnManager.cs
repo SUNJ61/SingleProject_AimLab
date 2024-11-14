@@ -43,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = PoolingManager.instance.GetObject(key);
             obj.transform.position = spawnPos.position;
+            obj.transform.rotation = spawnPos.rotation;
             obj.SetActive(true);
 
             return obj; //소환한 오브젝트 반환

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Coroutine RandomShootGameCorutine;
     private GameObject Player;
 
-    private float[] RandomShootGameLevelDelay = new float[2] {1.0f , 0.6f};
+    private float[] RandomShootGameLevelDelay = new float[2] {1.8f , 1.0f};
 
     private string[] RandomShootGameLevel = {"Normal","Hard"};
     private string[] AIGunMatchLevel = {"Attacker","Defender"};
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private readonly string RandomShootGamespawnPointName = "RandomShootGameSpawnPoint";
     private readonly string AIGunMatchPlayerSpawnPointName = "AIGunMatchPlayerSpawnPoint";
     private readonly string AIGunMatchAttackerSpawnPointName = "AIGunMatchAttackerSpawnPoint";
-    private readonly string AIGunMatchDependerSpawnPointName = "AIGunMatchDependerSpawnPoint"; 
+    private readonly string AIGunMatchDependerSpawnPointName = "AIGunMatchDefenderSpawnPoint"; 
 
     public float ClearTime = 0f;
 
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         while(RandomShootGameIdx < 20)
         {
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.5f);
             RandomShootGameIdx++;
             GameObject RandomShootGameObj = SpawnManager.instance.SetActivePos(RandomShootGamespawnPoint[Random.Range(0, RandomShootGamespawnPoint.Count)], 1);
             currentTarget = RandomShootGameObj;
@@ -132,12 +132,12 @@ public class GameManager : MonoBehaviour
         {
             isGameStart = true;
             isTeleport =true;
+            AIGunMatchSetting(AIGunMatchLevelIdx); //게임 세팅
 
-            Player.transform.position = AIGunMatchPlayerSpawnPoint[AIGunMatchLevelIdx].transform.position;
             ClearTime = 0f;
+            Player.transform.position = AIGunMatchPlayerSpawnPoint[AIGunMatchLevelIdx].transform.position;
 
             StartCoroutine(TeleportDelay());
-            AIGunMatchSetting(AIGunMatchLevelIdx);
             StartCoroutine(AIGunMatchTimer());
         }
     }
@@ -176,11 +176,11 @@ public class GameManager : MonoBehaviour
         switch(AIGunMatchLevel[idx])
         {
             case "Attacker":
-            //적군 플레이어 태그 변경.
+            //플레이어 태그 변경.
                 break;
 
             case "Defender":
-            //적군 플레이어 태그 변경.
+            //플레이어 태그 변경.
                 break; 
         }
     }

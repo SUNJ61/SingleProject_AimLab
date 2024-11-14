@@ -102,7 +102,7 @@ public class InGameUIManager : MonoBehaviour
 
      public void AIGunMatchTimeText(float time)
      {
-          AIGunMatchTimeTxt.text = $"Time : {time}";
+          AIGunMatchTimeTxt.text = $"Time : {time.ToString("F1")}";
      }
 
      public void AIGunMatchLevelText(string level)

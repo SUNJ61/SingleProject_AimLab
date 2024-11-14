@@ -111,9 +111,13 @@ public class PlayerFire : MonoBehaviour
                     {
                         InGameUIManager.instance.RaycastButtonHit(hit);
                     }
-                    if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //타겟에 맞았을 때
+                    if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //몸에 맞았을 때
                     {
-                        hit.transform.gameObject.SendMessage("HitDamage", 100); //나중에 적 npc제데로 만들면 수치 고치기.
+                        hit.transform.gameObject.SendMessage("HitDamage", gunData.BodyDamage);
+                    }
+                    else if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 8)) //머리에 맞았을 때
+                    {
+                        hit.transform.parent.gameObject.SendMessage("HitDamage", gunData.HeadDamage);
                     }
                     FireSpray(gunData.FireBranch);
                     gunData.BulletMax -= 1;
@@ -133,9 +137,13 @@ public class PlayerFire : MonoBehaviour
                     {
                         InGameUIManager.instance.RaycastButtonHit(hit);
                     }
-                    if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //타겟에 맞았을 때
+                    if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 7)) //몸에 맞았을 때
                     {
-                        hit.transform.gameObject.SendMessage("HitDamage", 100); //나중에 적 npc제데로 만들면 수치 고치기.
+                        hit.transform.gameObject.SendMessage("HitDamage", gunData.BodyDamage);
+                    }
+                    else if(Physics.Raycast(CameraPivot.position, CameraPivot.forward, out hit, 110.0f, 1 << 8)) //머리에 맞았을 때
+                    {
+                        hit.transform.parent.gameObject.SendMessage("HitDamage", gunData.HeadDamage);
                     }
                     playerMove.ApplyVerticalReBound(gunData.VerticalReBound);
                     gunData.BulletMax -= 1;
