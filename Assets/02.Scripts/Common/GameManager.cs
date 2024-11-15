@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AIGunMatchFalse() //플레이어가 사망시 호출
+    public void AIGunMatchFalse()
     {
         isGameStart = false;
         isTeleport = true;
@@ -160,9 +160,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator TeleportPlayer(Transform pos)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         Player.transform.position = pos.position;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         isTeleport = false;
     }
 
@@ -185,6 +185,11 @@ public class GameManager : MonoBehaviour
     {
         while(isGameStart)
         {
+            if(ClearTime >= 120.0f)
+            {
+                AIGunMatchFalse();
+                yield break;
+            }
             yield return new WaitForSeconds(0.1f);
             ClearTime += 0.1f;
         }

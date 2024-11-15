@@ -86,19 +86,19 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        CheckJumpState();
-        CheckMoveState();
-        Player_Moving();
-        Camera_Moving();
+        if (!GameManager.instance.isTeleport)
+        {
+            CheckJumpState();
+            CheckMoveState();
+            Player_Moving();
+            Camera_Moving();
+        }
     }
 
     private void Player_Moving()
     {
-        if (!GameManager.instance.isTeleport)
-        {
-            Vector3 move = transform.TransformDirection(PlayerDir);
-            Player_Controller.Move(move * moveSpeed * Time.deltaTime);
-        }
+        Vector3 move = transform.TransformDirection(PlayerDir);
+        Player_Controller.Move(move * moveSpeed * Time.deltaTime);
     }
 
     private void CheckMoveState()
