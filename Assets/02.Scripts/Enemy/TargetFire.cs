@@ -6,6 +6,7 @@ public class TargetFire : MonoBehaviour
 {
     private Transform PlayerTr;
     private Coroutine FireCoroutine;
+    private RaycastHit hit;
 
     private bool isDetection;
     public bool IsDetection
