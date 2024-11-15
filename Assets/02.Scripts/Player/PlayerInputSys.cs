@@ -8,6 +8,7 @@ public class PlayerInputSys : MonoBehaviour
     private PlayerFire playerFire;
     private Inventory playerInventory;
     private PlayerGetItem playerGetItem;
+    private UseItem useItem;
 
     private PlayerInput playerInput;
     private InputActionMap playerActionMap;
@@ -42,6 +43,7 @@ public class PlayerInputSys : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInventory = GetComponent<Inventory>();
         playerGetItem = GetComponent<PlayerGetItem>();
+        useItem = GetComponent<UseItem>();
     }
 
     private void OnEnable()
@@ -67,6 +69,8 @@ public class PlayerInputSys : MonoBehaviour
         playerActionMap.FindAction("Inventory").started += OnInventoryStarted;
         playerActionMap.FindAction("Shop").started += OnShopStarted;
         playerActionMap.FindAction("Escape").started += OnEscapeStarted;
+        playerActionMap.FindAction("Use").started += OnUseStarted;
+        playerActionMap.FindAction("Use").canceled += OnUseCanceled;
     }
 
     private void SendInventoryIdx(int idx)
@@ -178,5 +182,15 @@ public class PlayerInputSys : MonoBehaviour
     private void OnEscapeStarted(InputAction.CallbackContext context) // 닫기 키 누름
     {
         InGameUIManager.instance.EscapeUI = true;
+    }
+
+     private void OnUseStarted(InputAction.CallbackContext context) //발사 키 누름
+    {
+        useItem.IsUse = true;
+    }
+
+    private void OnUseCanceled(InputAction.CallbackContext context) //발사 키 땜
+    {
+        useItem.IsUse = false;
     }
 }

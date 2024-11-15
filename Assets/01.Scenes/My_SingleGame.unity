@@ -3883,6 +3883,7 @@ GameObject:
   - component: {fileID: 132049439}
   - component: {fileID: 132049441}
   - component: {fileID: 132049443}
+  - component: {fileID: 132049444}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4190,6 +4191,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9b44e9fc85cf6d4c8a05a1bd94c99fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &132049444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132049428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd14453382724dc4c8b398d72c24fe1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &134185270
@@ -8242,7 +8255,6 @@ MonoBehaviour:
   AIGunMatchAttackerSpawnPoint: []
   AIGunMatchDependerSpawnPoint: []
   ClearTime: 0
-  AIGunMatchLevelIdx: 0
   Score: 0
   isGameover: 0
   isGameStart: 0
@@ -17113,7 +17125,6 @@ Transform:
   - {fileID: 654898040}
   - {fileID: 654898046}
   - {fileID: 654898044}
-  - {fileID: 963411902}
   m_Father: {fileID: 1904849249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &654897966
@@ -17765,13 +17776,15 @@ GameObject:
   - component: {fileID: 654897964}
   - component: {fileID: 664673418}
   - component: {fileID: 641083338}
+  - component: {fileID: 664673419}
+  - component: {fileID: 664673420}
   m_Layer: 0
   m_Name: AIGunMatchBomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &655322894
 GameObject:
   m_ObjectHideFlags: 0
@@ -20383,6 +20396,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &664673419
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655322892}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.5, y: 0.1, z: 3.5}
+  m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!114 &664673420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655322892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39444a4f39145274c8354d1526128d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  BombCount: 0
 --- !u!1001 &665198483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29131,59 +29179,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &963411901
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 963411902}
-  - component: {fileID: 963411903}
-  m_Layer: 0
-  m_Name: BombDefuseRange
-  m_TagString: Bomb
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &963411902
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963411901}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.5, z: 0.4}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 654897964}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &963411903
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963411901}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8, y: 0.1, z: 8}
-  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &963993886
 GameObject:
   m_ObjectHideFlags: 0

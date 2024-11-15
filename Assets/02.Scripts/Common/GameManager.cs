@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]private List<Transform> AIGunMatchAttackerSpawnPoint;
     [SerializeField]private List<Transform> AIGunMatchDependerSpawnPoint;
     private GameObject currentTarget;
+    private GameObject AttackModeBomb;
     private Coroutine RandomShootGameCorutine;
+    private Coroutine AIGunMatchCorutine;
     private GameObject Player;
 
     private float[] RandomShootGameLevelDelay = new float[2] {1.8f , 1.0f};
@@ -28,7 +30,11 @@ public class GameManager : MonoBehaviour
 
     private int RandomShootGameIdx = 0;
     private int RandomShootGameLevelIdx = 0;
-    [SerializeField]private int AIGunMatchLevelIdx = 0;
+    public int AIGunMatchLevelIdx
+    {
+        get;
+        private set;
+    } = 0;
     public int Score = 0;
 
     public bool isGameover = false;
@@ -47,6 +53,7 @@ public class GameManager : MonoBehaviour
         AIGunMatchPlayerSpawnPoint = SpawnManager.instance.GetPoint(AIGunMatchPlayerSpawnPointName);
         AIGunMatchAttackerSpawnPoint = SpawnManager.instance.GetPoint(AIGunMatchAttackerSpawnPointName);
         AIGunMatchDependerSpawnPoint = SpawnManager.instance.GetPoint(AIGunMatchDependerSpawnPointName);
+        AttackModeBomb = GameObject.Find("AIGunMatchRoom").transform.GetChild(6).gameObject;
         Player = GameObject.Find("Player");
 
         CursorCtrl(InGameUIManager.instance.activeShopUI);
@@ -133,9 +140,12 @@ public class GameManager : MonoBehaviour
             isGameStart = true;
             isTeleport =true;
             ClearTime = 0f;
+
             AIGunMatchSetting(AIGunMatchLevelIdx); //게임 세팅
+            AttackModeBomb.SetActive(true);
+
             StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[AIGunMatchLevelIdx]));
-            StartCoroutine(AIGunMatchTimer());
+            AIGunMatchCorutine = StartCoroutine(AIGunMatchTimer());
         }
     }
 
@@ -155,7 +165,22 @@ public class GameManager : MonoBehaviour
     {
         isGameStart = false;
         isTeleport = true;
+
+        StopCoroutine(AIGunMatchCorutine);
+        AttackModeBomb.SetActive(false);
         StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[2]));
+    }
+
+    public void AIGunMatchSucess()
+    {
+        isGameStart = false;
+        isTeleport = true;
+
+        StopCoroutine(AIGunMatchCorutine);
+        AttackModeBomb.SetActive(false);
+        StartCoroutine(TeleportPlayer(AIGunMatchPlayerSpawnPoint[2]));
+
+        InGameUIManager.instance.AIGunMatchTimeText(ClearTime);
     }
 
     private IEnumerator TeleportPlayer(Transform pos)
@@ -185,11 +210,6 @@ public class GameManager : MonoBehaviour
     {
         while(isGameStart)
         {
-            if(ClearTime >= 120.0f)
-            {
-                AIGunMatchFalse();
-                yield break;
-            }
             yield return new WaitForSeconds(0.1f);
             ClearTime += 0.1f;
         }
